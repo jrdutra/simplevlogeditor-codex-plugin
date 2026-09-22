@@ -1,0 +1,1 @@
+# simplevlogeditor-codex-plugin

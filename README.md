@@ -111,8 +111,8 @@ As alterações distribuídas devem estar dentro de `plugins/simple-vlog-editor`
 Mantenha o manifesto e os scripts juntos ao publicar uma nova versão. O ZIP
 usado na distribuição manual não é necessário para a instalação via GitHub.
 
-Ao executar `npm run pack:plugin` em `ai-client/codex`, esta cópia do plugin é
-sincronizada automaticamente antes da geração do ZIP. Este README e o README na
-raiz são mantidos porque descrevem a instalação pelo marketplace.
+O build do site empacota `plugins/simple-vlog-editor` deste diretório no ZIP de
+download. Este README descreve a instalação pelo marketplace; o README dentro
+do plugin acompanha a cópia distribuída no ZIP.
 
 Consulte também a [documentação do plugin](plugins/simple-vlog-editor/README.md).

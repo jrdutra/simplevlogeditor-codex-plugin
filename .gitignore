@@ -1,0 +1,9 @@
+node_modules/
+.cache/
+*.log
+*.zip
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+simplevlogeditor-recovery.sve.json

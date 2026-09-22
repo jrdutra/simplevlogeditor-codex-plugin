@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "simple-vlog-editor": {
+      "command": "node",
+      "args": [
+        "./scripts/mcp-launcher.mjs"
+      ],
+      "cwd": ".",
+      "env_vars": [
+        "PATH",
+        "SystemRoot",
+        "SystemDrive",
+        "ProgramW6432",
+        "ProgramFiles",
+        "ProgramFiles(x86)",
+        "USERPROFILE",
+        "HOMEDRIVE",
+        "HOMEPATH",
+        "LOCALAPPDATA",
+        "APPDATA",
+        "TEMP",
+        "TMP",
+        "SVE_MCP_ROOTS",
+        "SVE_MCP_LOG_FILE",
+        "SVE_SKIP_UPDATE_CHECK",
+        "SVE_RUNTIME_MODE",
+        "SVE_DEV_EDITOR_ROOT"
+      ],
+      "env": {
+        "SVE_CONTROLLER": "codex"
+      },
+      "enabled": true,
+      "startup_timeout_sec": 60,
+      "tool_timeout_sec": 1800
+    }
+  }
+}

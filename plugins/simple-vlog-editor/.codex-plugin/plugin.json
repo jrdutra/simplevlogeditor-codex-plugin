@@ -1,6 +1,6 @@
 {
   "name": "simple-vlog-editor",
-  "version": "2.7.4+codex.20260922152557",
+  "version": "2.7.5",
   "description": "Understand and edit complete videos in the visible SimpleVlogEditor through its local MCP server.",
   "author": {
     "name": "SimpleVlogEditor"

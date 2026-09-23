@@ -49,6 +49,7 @@ report them to the user as failures unless something stays blocked.
 1. `get_recovery_state` — is there a previous edit or checkpoint for this material? (Resume rules: see `edit-video`.)
 2. `health_check` — the editor is connected and visible. If the only tools available are `check_installation`, `health_check` and `get_editor_capabilities`, SimpleVlogEditor is not installed: tell the user to download the installer from https://simplevlogeditor.com/, install it keeping the default folder, and call `check_installation` once they have.
 3. `get_editor_capabilities` — read limits, presets, fonts, tag shapes, transitions. Pass on any `updateNotice` to the user first.
+   Editor and plugin ship together and a vlog edit is long: before starting one, make sure both are the current release. If either is behind, ask the user to install the current editor from https://simplevlogeditor.com/ (uninstalling the old one first, then restarting the computer), to reinstall this plugin from its repository, and to restart Claude Code or Codex — and wait for them rather than editing across versions.
 4. `get_project` and `get_timeline` — record the current `revision`.
 
 Never start from an old revision. Every later mutation carries `expectedRevision`
@@ -337,6 +338,19 @@ transition on every cut.
 When a supplied audio file is clearly a soundtrack, consider
 `set_project_soundtrack`. Never turn an ambiguous audio file into background
 music on your own.
+
+## Phase 32a — Even out the volume
+
+**Always.** Every vlog is levelled: clips recorded on different days, and a speaker
+who leans in and then drops their voice, arrive at the viewer at the same level.
+It is the editor's own **Even out the volume across the project**, so switch it on
+with `set_project_settings` → `{ "loudness": { "enabled": true } }` and leave the
+rest of its settings as they are (`mode: "level"`, the default target). Do it once,
+before the export, and mention it in the summary rather than asking about it.
+
+It is not a licence to touch anything else about the sound: it lifts speech, never
+silence, room tone or hiss, and per-clip volume and replacement audio stay as you
+set them. Turn it off only if the user asks for the raw levels.
 
 ## Phase 33 — Noise
 

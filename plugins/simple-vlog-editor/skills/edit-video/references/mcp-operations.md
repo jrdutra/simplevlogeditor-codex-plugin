@@ -73,6 +73,7 @@ use fresh ids and the current revision.
 - adding, updating, and removing ordinary, social, Subscribe, and QR Code tags;
 - adding, updating, and removing manual dynamic push-ins;
 - changing aspect ratio, reframe mode, resolution, output formats, loudness, soundtrack fades, and project defaults.
+  Loudness is the interface's *Even out the volume across the project*: `set_project_settings` → `{ "loudness": { "enabled": true } }`, which an autonomous vlog edit always switches on (see the `edit-vlog` skill).
 
 Use `undo` and `redo` for whole batches. Use `preview` to open, seek, play, pause, or close the shared visual preview. Use `save_project`, `open_project`, and `export` only with paths admitted by the Electron MCP bridge.
 

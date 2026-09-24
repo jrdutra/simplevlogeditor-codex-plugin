@@ -1,5 +1,17 @@
 # SimpleVlogEditor MCP operations
 
+## Video packaging (thumbnails and metadata)
+
+- `set_video_packaging`: place up to three generated 16:9 image paths, three matching titles, a complete description and tags in the visible Video Packaging tool. Use it for deliverable thumbnails or video metadata instead of adding them to the timeline. Omitted fields remain unchanged and the page receives focus after insertion.
+- `get_video_packaging`: inspect the currently displayed package before a partial update or to verify delivery.
+- `clear_video_packaging`: remove the complete displayed package.
+- `get_packaging_sources`: one read of everything a packaging run needs — whether a project is loaded, which clips already have a transcript or saved cover backgrounds, what was understood on an earlier pass, the links the QR tags carry, and where covers may be written. Requires the Video Editor page to be open.
+- `save_frames`: write chosen frames to disk at full size, beside the footage, to serve as cover backgrounds. It saves the finished picture (the same composition as `get_frames` `composited: true`) and returns each file's `path`, source `timestamp` and `outputTime`. Instants that were cut out, fall inside a transition, or need a person cut-out the machine cannot compute are refused with `unfaithful_frame` and a `suggestedTimestamp`, before anything is written. Each file is tied to the edit it came from: after any later change it no longer counts as a background, and `set_video_packaging` refuses covers drawn on it.
+- `get_packaging_tag_style` / `set_packaging_tag_style`: the lettering every cover has to copy. Eleven styles ship with the editor (Classic is the default) and the user may have loaded their own, which the application keeps across restarts. When the user asked to be consulted, `get_packaging_tag_style` opens the picker on screen and waits for them.
+- `set_video_understanding` / `get_video_understanding`: store and read back the summary, topics, chapters, highlights and language of the video, so a later run does not read the transcript and the frames again.
+
+The `create-video-packaging` skill is the workflow these belong to. Run it as soon as `finish_editing` returns **only when** its result says `videoPackaging.automatic: true`; the project setting `autoVideoPackaging` (a checkbox in the Video Editor's project settings, on by default) decides. When it is `false`, package only on the user's explicit request. `set_project_settings` accepts `{ "autoVideoPackaging": true | false }` — change it only when the user asks.
+
 Always call `get_editor_capabilities` because the running editor is the final authority. This reference explains the intended workflow and the stable operation families.
 
 ## Automatic recovery
@@ -268,10 +280,16 @@ whether a picture lands whole and in the right place.
 ```
 
 The result carries `frame` (the export's pixel size), the per-frame `outputTime`,
-the container's `images` report, and `subjectLayerRendered`. A false
-`subjectLayerRendered` means the segmentation model did not run for that frame:
-position and size are still readable, occlusion is not. Report that rather than
-claiming the middle layer was checked.
+the container's `images` report, `allFaithful` and `subjectLayerRendered`. Each
+frame also says `faithful`, and when it is not, `unfaithfulReason` (`removed`,
+`transition`, `subject-unavailable`, `effect`) and a `note`: a source instant
+that was cut out, or one inside a transition, is composed but is **not** a frame
+the export contains. `subjectLayer` is `not-needed`, `rendered`, `no-subject`
+(the model ran and found nobody — the export draws it the same way) or
+`unavailable`. `subjectLayerRendered` is true only when every frame that needed
+the person cut out got it: position and size are still readable when it is
+false, occlusion is not. Report that rather than claiming the middle layer was
+checked. `get_contact_sheet` accepts `composited: true` too.
 
 ```json
 {

@@ -391,7 +391,11 @@ confirm the duration; confirm the operations you intended are all present;
 
 ## Phase 39 — Finish
 
-`finish_editing` with a concise summary. In chat, report briefly the main
-changes — cuts (where, what, the words that now meet), push-ins, images (shot
+`finish_editing` with a concise summary. Then read `videoPackaging.automatic` in
+its result: when it is `true`, run `create-video-packaging` straight away; when it
+is `false`, the user switched automatic Video Packaging off for this project, so
+the edit ends here — do not make covers, titles, a description or tags unless
+they ask.
+In chat, report briefly the main changes — cuts (where, what, the words that now meet), push-ins, images (shot
 list), cards, titles, tags, effects, transitions — plus the decisions you left
 to the user, and the video description required by `edit-video`.

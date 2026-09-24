@@ -119,6 +119,6 @@ in that language, use English and say that is what you did. This applies to the
 description and the chapter titles only: interface strings, log lines and your
 own account of what you changed stay in English.
 
-The editor's MCP activity console is visible to the user and remains minimized if the user minimizes it. Keep tool calls meaningfully grouped. At the end, save a checkpoint, call `finish_editing` with a concise summary, and let the on-screen modal ask whether to watch the preview or render immediately. Also report subjective decisions, current project revision, and saved/exported paths in chat.
+The editor's MCP activity console is visible to the user and remains minimized if the user minimizes it. Keep tool calls meaningfully grouped. At the end, save a checkpoint, call `finish_editing` with a concise summary, and let the on-screen modal ask whether to watch the preview or render immediately. Then read `videoPackaging.automatic` in the `finish_editing` result. `true` (the project default): run `create-video-packaging` without being asked, so the finished edit gets its three covers, three titles, description with chapters and hashtags, and tags in the Video Packaging tool. `false`: the user switched automatic Video Packaging off in the project settings — stop at the edit and package only if they ask. Also report subjective decisions, current project revision, and saved/exported paths in chat.
 
 For the complete command and operation catalogue, read [MCP operations](references/mcp-operations.md) when planning a concrete edit.
